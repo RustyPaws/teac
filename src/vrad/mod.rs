@@ -363,8 +363,8 @@ fn write_ambient(ctx: &Ctx, bsp: &mut BspFile, scene: &Scene, g: &Gather, rad: &
             let mut p = (min + max) * 0.5;
             if scene.leaf_at(p) != li {
                 // Try a few other points of the box.
-                for k in 1..16 {
-                    let f = |i: u32| ((k * 2654435761u32).rotate_left(i) % 1000) as f64 / 1000.0;
+                for k in 1u32..16 {
+                    let f = |i: u32| ((k.wrapping_mul(2654435761u32)).rotate_left(i) % 1000) as f64 / 1000.0;
                     let q = min + (max - min) * DVec3::new(f(3), f(11), f(19));
                     if scene.leaf_at(q) == li {
                         p = q;
