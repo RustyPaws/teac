@@ -1,0 +1,35 @@
+[package]
+name = "teac"
+version = "0.1.0"
+edition = "2024"
+description = "Native VMF -> BSP compiler (vbsp/vvis/vrad replacement)"
+license = "MIT"
+
+[features]
+# BSP format / engine branch. Exactly one must be enabled.
+default = ["v21"]
+v21 = [] # Portal 2
+
+[dependencies]
+anyhow = "1"
+bytemuck = { version = "1", features = ["derive"] }
+clap = { version = "4", features = ["derive"] }
+comfy-table = "7"
+console = "0.15"
+indicatif = { version = "0.17", features = ["rayon"] }
+glam = "0.30"
+log = "0.4"
+env_logger = "0.11"
+logos = "0.16"
+rayon = "1"
+serde = { version = "1", features = ["derive"] }
+smallvec = { version = "1", features = ["union", "const_generics"] }
+toml = "0.8"
+zip = { version = "2", default-features = false }
+
+[profile.dev]
+opt-level = 2
+
+[profile.release]
+opt-level = 3
+debug = 1
